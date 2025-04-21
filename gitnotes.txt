@@ -1,0 +1,98 @@
+Steps for GIT:
+
+Launch an EC2 instance
+Switch to Root user: sudo su -
+
+Install Git: yum install git -y
+Verify the Git installation: git --version
+
+Make Directory to create and store for Local Repo: mkdir dsg
+Switch to created Directory : cd dsg
+
+Initialize a new Git repository in the directory: git init
+--> This command creates a hidden .git folder in the directory, which contains all the metadata and version history for your project.
+To verify initialization of git repo : ls -ltra
+To revert initialization of git repo and converting back to normal directory : rm -rf .git
+
+Set the Global Username: git config --global user.name "Your Name"
+-->Sets your name as the author for all commits you make across all repositories on the current system.
+Set the Global Email: git config --global user.email "youremail@example.com"
+-->Associates your email address with your commits. This email should match the one you use for services like GitHub if you're pushing commits to a remote repository.
+Verify the Configuration: git config --global --list
+To edit the Configuration: git config --global --edit
+
+Set Repository-Specific Username and Email: Navigate to a specific repository and configure a different username and email: git Username cmd git config user.name "Your Name"
+Email cmd git config user.email "youremail@example.com"
+
+What Happens During a Push when both global and local configuration for specific repo?
+When you commit and push code from the repository:
+Git will use the repository-specific username and email if they are configured.
+If repository-specific settings are absent, Git will fall back to the global username and email.
+
+Create a demo file : vi index.html
+--> insert data inside the file 
+Verify the file: cat index.html
+
+Check the File’s Status: git status 
+--> Git will show that index.html as Untracked file.
+
+Add the Files to the Staging Area:- 
+To stage all changes/files at once: git add .  /  git add *
+git add <file-name>/index.html
+Moves index.html from the workspace to the staging area, marking it for inclusion in the next commit.
+Check the File’s Status after adding it to staging area: git status 
+--> Git will show that index.html as new file.
+To revert file from Staging area to Workspace : git rm --cached index.html   /  git restore --staged <fileName>
+git status : show that index.html as Untracked file.
+
+Commit the staged file with a descriptive message: git commit -m "First: Added index.html"
+--> This moves the files/changes from the staging area into the repository.
+Message:  It describes the changes made, making it easier to understand the purpose of each commit later.
+Commit IDs (SHA-1 Hashes): Every commit in Git is assigned a unique identifier called a SHA-1 hash. This is a 40-character string.
+git status : Shows Nothing to Commit, Working tree Clean.
+
+Viewing Commit History : git log 
+--> Shows details(commit ID, Author, Date & Msg) of recent commits in reverse chronological order.
+Display a One-Line Summary : git log --oneline
+To visualize the branching structure: git log --graph --oneline --all
+
+To see what was changed in a specific commit: git show <commit-hash>
+
+NOTE : 
+1] If you make changes to the file after committing, the file returns to the workspace (working directory) as "modified". These changes are not tracked by Git until you explicitly stage and commit them again.
+2] HEAD points to the current position in the repository. When you’re working on the master branch, HEAD points to the latest commit on master. If you switch branches, HEAD will point to the latest commit of the new branch.
+
+
+Pushing Code to a Remote Repository on GitHub :-
+Open GitHub in your browser and log in with your credentials.
+Click on the "New" button (or "Create Repository").
+Fill in the following details:
+Repository Name: Use a name similar to your local repository (e.g., dsg).
+Description (Optional): Provide a short description of your project.
+Visibility:
+Public: Anyone can view your repository.
+Private: Only you and collaborators can view your repository.
+Click on the "Create Repository" button.
+Copy the Repository URL.
+
+Switch back to your terminal where the local repository (dsg) is set up.
+Add the Remote Repository to Your Local Repo: git remote add origin <remote-repo-URL>
+Verify the Remote Repository: git remote -v
+To remove the Remote Repository from Your Local Repo : git remote rm origin
+
+Setting Up a Personal Access Token (PAT)
+Step 1: Generate a PAT
+Log into your GitHub account.
+Click on your profile picture (top-right corner) and select Settings.
+On the left sidebar, go to Developer Settings > Personal Access Tokens > Tokens (classic).
+Click on Generate New Token.
+Choose the required permissions:
+Chose Repository (for accessing private repositories).
+Set an expiration date (e.g., 30 days or no expiration).
+Click Generate Token and copy the ONE TIME generated token.
+
+Push the code to the remote repository: git push origin master
+-Provide username of GitHub account.
+-Paste the Generated Token in place of Password.
+
+
