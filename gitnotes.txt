@@ -95,4 +95,7 @@ Push the code to the remote repository: git push origin master
 -Provide username of GitHub account.
 -Paste the Generated Token in place of Password.
 
-
+To check Commit Status : git log
+shows--> (HEAD -> master, origin/master) means:
+You are on the master branch.
+Your local branch is synchronized with the master branch on the remote repository (origin).
