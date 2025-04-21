@@ -99,3 +99,88 @@ To check Commit Status : git log
 shows--> (HEAD -> master, origin/master) means:
 You are on the master branch.
 Your local branch is synchronized with the master branch on the remote repository (origin).
+
+Day068 --------------------
+
+Sharing a Private Repository with Collaborators  
+1. Open your repository and go to Settings > Collaborators and Teams.  
+2. Click Invite a collaborator, enter their GitHub username or email, and send the invite.  
+3. The collaborator accepts the invitation via email or notifications and can then clone, push, and pull changes based on the permissions set.  
+
+NOTE : 
+1] Handling Changes to Pushed Files : 
+If a pushed file is edited, it returns to the *workspace* as "modified." Stage and commit the changes again to include them in a new commit, then push to update the remote repository.
+
+Checking Commit History in GitHub
+View Commit History: In your repository, go to the "Commits" tab to see a list of all commits, who made them, and when.
+Check File History: Open a file and click on "History" to view changes made to that specific file, along with commit messages and authors. 
+
+Setting Up Git and Pulling a Repository on Another Developer's EC2 Instance : VaishnaviGhuge
+Install Git: Install Git if not already done (yum install git -y).
+Configure Git: Set up Git with the developer's username and email using.
+Clone the Repository:- Use the repository URL to clone the remote repository: git clone <repo-url>
+Navigate to the Repository: Move into the repository directory (cd dsg) to begin working.
+
+NOTE: If the Repo is Private, then on running the clone command it will ask for username of the collaborator and in place of password token needs to be pasted i.e. Personal Access Token (PAT).
+Since it is private repo it can be access only if the other developer is in collaborators list.
+
+Adding and Editing Code by 2nd Developer :-
+Add/Edit Code: The 2nd developer makes changes to files in the dsg repository.
+Stage and Commit: Stage the changes and commit them locally.
+Push Updates: Push the changes to the remote repository: git push origin master .
+
+Pulling Updates by 1st Developer
+Check for Updates: The 1st developer runs: git pull in the dsg directory to fetch and merge the latest changes from the remote repository.
+Verify Updates: They can check the modified files and updated parts locally.
+
+Forking the dsg Repository for Dev3 :-
+Dev3 logs into their GitHub account.
+Fork the Repository:
+Navigate to the dsg repository in GitHub.
+Click on the "Fork" button (top-right corner).
+The repository is forked into Dev3's account as a separate copy.
+Clone the Forked Repository:
+Dev3 copies the URL of their forked repository and runs: git clone <forked-repo-url>
+Dev3 can add/edit files, stage, commit, and push changes to their fork without affecting the original repository.
+If Dev3 wants to contribute back, they can create a pull request to the original dsg repository.
+
+
+
+
+*** INTERVIEW QUESTION ***
+1] Where can be seen the Graphical Representation of Commits to a Repo ? 
+--> GitHub:- Go to the "Insights" tab.
+--> Command Line (Locally):- Use the git log command with the --graph option: git log --oneline --graph
+
+2] What is the difference between a fork and a clone?
+Fork: Creates a copy of a repository under your GitHub account, enabling independent development.
+Clone: Downloads a repository to your local machine for offline development, typically linked to the original repo.
+
+3] What is the difference between HEAD and master?
+HEAD: A pointer to the current commit or branch you're working on.
+master: The default main branch in Git (now often replaced by main).
+
+4] What is the difference between git add and git commit?
+git add: Moves changes from the working directory to the staging area.
+git commit: Records the staged changes as a snapshot in the repository's history.
+
+5] What is the difference between the working directory and the staging area?
+Working Directory: The files you see in your local repo that you can edit.
+Staging Area: A space where changes are prepared before committing to the repository.
+
+6] What is the strategy in your organization with Git?
+In Our project we are having quaterly based release.
+for in every quater we have a main release and we create main release branches in every quater.
+For Q1 we have 2024Q1 branch for Q2 release we have 2024Q2 branch which we created from 2024Q1 branch.
+types of branch
+1. Main release branch:-
+this branch has commits which will go to production deployment after the release is completed.
+2. Feature Branch:-
+Feature branches are created when dev team is working on some feature, and feature branch is then merged in the Main release branch after verifiction.
+if this feature is needed in previous releases then we can also back merge this feature in the pervious main release branches.
+3. Bug Fix Branch:-
+when a client is having a release and has some issue or he finds some bug, we then create a bug fix branch from the
+main release branch which is client is using.
+after the fixes are done in the bug fix branch we provide it to the client.
+if the same bug is found in the later releases then we can forward merge it in the further branches, also can be back merged if required.
+
