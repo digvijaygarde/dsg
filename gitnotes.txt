@@ -145,6 +145,17 @@ Dev3 can add/edit files, stage, commit, and push changes to their fork without a
 If Dev3 wants to contribute back, they can create a pull request to the original dsg repository.
 
 
+Day069----------------------------------
+
+Interview*
+Q] How to edit the comment provided as Messasge during last/recent Commit?
+--> If you want to change the message of the most recent commit:
+git commit --amend -m "New commit message"
+Q] To change the author of a commit: git commit --amend --author="New Author Name <newemail@example.com>"
+
+Ensure you haven’t pushed the commit to a remote repository yet. If you’ve already pushed, you’ll need to force-push:
+git push --force
+
 
 
 *** INTERVIEW QUESTION ***
