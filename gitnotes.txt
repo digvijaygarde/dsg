@@ -158,7 +158,6 @@ Q] To change the author of a commit: git commit --amend --author="New Author Nam
 Ensure you haven’t pushed the commit to a remote repository yet. If you’ve already pushed, you’ll need to force-push:
 git push --force
 
-<<<<<<< HEAD
 Dealing with Folders in Git:-
 Git tracks files but does not recognize or track empty folders.
 A folder will only be part of a commit if it contains at least one tracked file or even empty file.
