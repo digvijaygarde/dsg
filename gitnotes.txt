@@ -89,7 +89,8 @@ Click on Generate New Token.
 Choose the required permissions:
 Chose Repository (for accessing private repositories).
 Set an expiration date (e.g., 30 days or no expiration).
-Click Generate Token and copy the ONE TIME generated token.
+Click Generate Token and copy the ONE TIME generated token. 
+Token Generated : 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
 
 Push the code to the remote repository: git push origin master
 -Provide username of GitHub account.
@@ -99,6 +100,7 @@ To check Commit Status : git log
 shows--> (HEAD -> master, origin/master) means:
 You are on the master branch.
 Your local branch is synchronized with the master branch on the remote repository (origin).
+
 
 Day068 --------------------
 
@@ -145,6 +147,82 @@ Dev3 can add/edit files, stage, commit, and push changes to their fork without a
 If Dev3 wants to contribute back, they can create a pull request to the original dsg repository.
 
 
+Day069----------------------------------
+
+Interview*
+Q] How to edit the comment provided as Messasge during last/recent Commit?
+--> If you want to change the message of the most recent commit:
+git commit --amend -m "New commit message"
+Q] To change the author of a commit: git commit --amend --author="New Author Name <newemail@example.com>"
+
+Ensure you haven’t pushed the commit to a remote repository yet. If you’ve already pushed, you’ll need to force-push:
+git push --force
+
+Dealing with Folders in Git:-
+Git tracks files but does not recognize or track empty folders.
+A folder will only be part of a commit if it contains at least one tracked file or even empty file.
+If there's a requirement to include an empty folder in your Git repository, you can create a .gitignore file within that folder. This .gitignore file serves as a placeholder and allows Git to recognize the folder.
+
+Other Uses of .gitignore:-
+The .gitignore file is commonly used to specify files or patterns of files that Git should ignore and not track.
+Examples:
+Ignoring log files, temporary files, or system-specific files. Ex. *.log, *.tmp, node_modules/, .env
+
+To delete all untracked files and directories from the workspace in Git:-
+to Delete Untracked Files: git clean -f
+to Delete Untracked Files and Directories: git clean -fd
+Dry Run First: To avoid accidentally deleting important files, always use: git clean -n first to see what will be removed among the files
+
+If you have edited a committed file and now it is in Modified state, now you want to discard the changes to revert it to the last committed state: 
+git checkout -- <file-name>
+Alternative : git restore <file-name>
+
+NOTES:
+1] No Recovery: Once you discard changes, the edits are permanently lost. Ensure you do not need the changes before running the command.
+2] Unstaged Changes Only: These commands only affect unstaged changes in the working directory. If the file is staged (added to the staging area), you need to first unstage it using git reset <file-name>.
+
+**MImp Que: Diff between git fetch Vs git pull :-
+Git Fetch: Downloads updates from the remote repository but doesn't merge them into your local branch.
+Use git fetch when:
+You want to see the changes on the remote branch before merging them.
+You plan to review or test updates before applying them locally.
+git diff After git fetch :- This shows the changes between your local branch (master) and the corresponding remote branch (origin/master). It helps you review what will change if you decide to merge.
+: git diff master origin/master
+
+Git Pull: Downloads updates from the remote repository and automatically merges them into your local branch.
+Use git pull when:
+You are ready to bring your local branch in sync with the remote branch immediately.
+You are confident in the changes being merged without additional review.
+
+
+Day070-------------------------------------
+
+Scenario: Push Without Recent Changes and Handling Merge
+When multiple developers work on the same repository, it's essential to synchronize with the latest remote changes before pushing.
+The developer attempts to push changes to the remote branch without pulling the latest commits.
+Git rejects the push with the error:
+What can be done..?
+--> The developer runs the following command to enable fast-forward merges during pulls: git config pull.ff true
+This setting ensures that if no conflicts exist, Git performs a fast-forward merge automatically during git pull which needs to be configured only once for a repo.
+The developer executes: git pull origin master
+If no conflicts exist, the merge happens automatically (fast-forward or regular merge).
+If there are conflicts, Git pauses to resolve them.
+Merge Commit: A merge commit records the history of both branches being combined, Created when the local branch and the remote branch have diverging commits.
+Git prompts the developer to confirm the merge commit message in a text editor (default is vim), save the message.
+Once the pull and merge are complete, the developer pushes the updated local branch: git push origin master
+
+In the same condition what happens if the file getting push is same with different content.
+Git rejects the push with the error;
+Pulling the Latest Changes: Git attempts to merge the changes from the remote branch into the local branch. If the file content differs, a merge conflict occurs.
+Merge Conflict Detected: The Conflict file when open in editor will include conflict markers (<<<<<<<, =======, >>>>>>>) indicating the differences between the local and remote changes. The developer must edit the file to remove these markers and keep the desired content.
+After resolving the conflict, the developer stages the file, commits the resolved changes. Git prompts for a merge commit message by default, explaining the conflict resolution.
+Pushing the Resolved Changes: git push origin master
+
+Branching :-
+Branching is a common strategy to avoid conflicts in scenarios where multiple developers work on the same repository. By isolating changes in separate branches, the team can reduce the likelihood of editing the same files simultaneously.
+Main Branch (Master): The default branch, typically the production-ready version of the code.
+Feature Branches: Used for developing new features or working on fixes without affecting the main branch.
+
 
 
 *** INTERVIEW QUESTION ***
@@ -183,4 +261,3 @@ when a client is having a release and has some issue or he finds some bug, we th
 main release branch which is client is using.
 after the fixes are done in the bug fix branch we provide it to the client.
 if the same bug is found in the later releases then we can forward merge it in the further branches, also can be back merged if required.
-
