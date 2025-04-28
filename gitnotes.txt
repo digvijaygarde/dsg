@@ -158,6 +158,7 @@ Q] To change the author of a commit: git commit --amend --author="New Author Nam
 Ensure you haven’t pushed the commit to a remote repository yet. If you’ve already pushed, you’ll need to force-push:
 git push --force
 
+<<<<<<< HEAD
 Dealing with Folders in Git:-
 Git tracks files but does not recognize or track empty folders.
 A folder will only be part of a commit if it contains at least one tracked file or even empty file.
@@ -222,7 +223,6 @@ Branching :-
 Branching is a common strategy to avoid conflicts in scenarios where multiple developers work on the same repository. By isolating changes in separate branches, the team can reduce the likelihood of editing the same files simultaneously.
 Main Branch (Master): The default branch, typically the production-ready version of the code.
 Feature Branches: Used for developing new features or working on fixes without affecting the main branch.
-
 
 
 *** INTERVIEW QUESTION ***
